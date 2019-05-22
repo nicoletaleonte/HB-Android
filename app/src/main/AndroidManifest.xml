@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.happybirthday_android">
-
-    <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:icon="@drawable/bursdag_logo"
+        android:label="Bursdag"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="Bursdag" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MyContact"
+            android:label="@string/title_activity_ny_kontakt" >
+        </activity>
+        <activity
+            android:name=".EndreKontakt"
+            android:label="@string/title_activity_endre_kontakt" >
+        </activity>
+        <activity
+            android:name=".SetPreferencesActivity"
+            android:label="@string/preferanser" >
+        </activity>
+
+        <service android:name=".Varsling"></service>
+        <service android:name=".SettPeriodiskService"></service>
+
+        <receiver android:name=".Mottaker"
+            android:enabled="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.example.s198586_mappe2.startVarsling" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

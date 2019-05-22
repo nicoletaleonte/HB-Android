@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/EditContactLayout">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tekstfelt_navn"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_navn"
+        android:inputType="textPersonName"
+        android:hint="@string/labelNavn" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tekstfelt_tlf"
+        android:hint="@string/labelTlf"
+        android:layout_below="@+id/tekstfelt_navn"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_tlf"
+        android:inputType="phone" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tekstfelt_dato"
+        android:hint="@string/labelFodselsdag"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/tekstfelt_tlf"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_dato" />
+
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelSMS"
+        android:id="@+id/knapp_sendSMS"
+        android:checked="false"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tekstfelt_dato"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_navn"
+        android:layout_alignBottom="@+id/tekstfelt_navn"
+        android:src="@drawable/ikon_navn"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelNavn"
+        android:contextClickable="false" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_tlf"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ikon_tlf"
+        android:layout_marginBottom="5dp"
+        android:layout_alignBottom="@+id/tekstfelt_tlf"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelTlf" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_dato"
+        android:src="@drawable/ikon_dato"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/tekstfelt_dato"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelFodselsdag" />
+
+</RelativeLayout>

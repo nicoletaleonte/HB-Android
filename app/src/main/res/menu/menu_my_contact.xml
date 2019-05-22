@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MyContact">
+    <item
+        android:id="@+id/action_avbryt"
+        android:title="@string/avbryt"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ikon_avbryt" />
+    <item
+        android:id="@+id/action_lagre"
+        android:title="@string/leggTilKontakt"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/ikon_check" />
+
+</menu>

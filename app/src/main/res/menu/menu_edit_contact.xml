@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.s198586_mappe2.EndreKontakt">
+    <item
+        android:id="@+id/action_avbryt"
+        android:title="@string/avbryt"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/ikon_avbryt" />
+    <item
+        android:id="@+id/action_lagre"
+        android:title="@string/leggTilKontakt"
+        android:orderInCategory="300"
+        app:showAsAction="always"
+        android:icon="@drawable/ikon_check" />
+    <item
+        android:id="@+id/action_slette"
+        android:title="@string/avbryt"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ikon_slette" />
+</menu>
