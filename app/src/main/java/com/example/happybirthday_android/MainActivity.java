@@ -66,18 +66,18 @@ public class MainActivity extends AppCompatActivity implements LinkListFragment.
         super.onResume();
 
         // oppdater list på forsiden hvis den har blitt endret
-//        if(dbEndret){
-//            LinkListFragment kontaktListFragment = (LinkListFragment) getFragmentManager().findFragmentById(R.id.linkListFragment);
-//
-//            if(kontaktListFragment == null){
-//                kontaktListFragment = new LinkListFragment();
-//                FragmentManager fm = getFragmentManager();
-//                FragmentTransaction ft = fm.beginTransaction();
-//                ft.replace(R.id.linkListFragment,kontaktListFragment);
-//                ft.commit();
-//            }
-//            dbEndret = false;
-//        }
+        if(dbEndret){
+            LinkListFragment kontaktListFragment = (LinkListFragment).getFragmentManager().findFragmentById(R.id.linkListFragment);
+
+            if(kontaktListFragment == null){
+                kontaktListFragment = new LinkListFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.linkListFragment,kontaktListFragment);
+                ft.commit();
+            }
+            dbEndret = false;
+        }
 
         // sjekk hvis preferanser har blitt endret
         smsMelding = PreferenceManager.getDefaultSharedPreferences(this).getString("edittext_preference", "Gratulerer med dagen!");
