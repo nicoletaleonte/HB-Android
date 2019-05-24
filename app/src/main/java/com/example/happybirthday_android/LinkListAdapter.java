@@ -1,13 +1,11 @@
 package com.example.happybirthday_android;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -19,25 +17,25 @@ import java.util.Locale;
 
 public class LinkListAdapter extends BaseAdapter {
 
-    List<Contact> kontakter;
+    List<Contact> contacts;
     Context context;
     LayoutInflater layoutInflater;
 
-    public LinkListAdapter(Context context, List<Contact> kontakter){
+    public LinkListAdapter(Context context, List<Contact> contacts){
         super();
         layoutInflater = LayoutInflater.from(context);
-        this.kontakter = kontakter;
+        this.contacts = contacts;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return kontakter.size();
+        return contacts.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return kontakter.get(position);
+        return contacts.get(position);
     }
 
     @Override
@@ -54,8 +52,8 @@ public class LinkListAdapter extends BaseAdapter {
 
             // initialisere
             viewHolder = new ViewHolder();
-            viewHolder.kontakt_navn = (TextView) convertView.findViewById(R.id.contact_name);
-            viewHolder.kontakt_alder = (TextView) convertView.findViewById(R.id.contact_varsta);
+            viewHolder.contact_name = (TextView) convertView.findViewById(R.id.contact_name);
+            viewHolder.contact_varsta = (TextView) convertView.findViewById(R.id.contact_varsta);
             convertView.setTag(viewHolder);
         }
         else
@@ -64,33 +62,33 @@ public class LinkListAdapter extends BaseAdapter {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
         Contact contact = (Contact) getItem(position);
-        Calendar iDag = GregorianCalendar.getInstance();
-        Calendar bursdag = GregorianCalendar.getInstance();
-        Calendar fodselsdag = GregorianCalendar.getInstance();
-        bursdag.set(Calendar.YEAR,iDag.get(Calendar.YEAR));
-        bursdag.set(Calendar.MONTH,contact.getManed());
-        bursdag.set(Calendar.DAY_OF_MONTH, contact.getDag());
-        fodselsdag.set(Calendar.YEAR, contact.getAr());
-        fodselsdag.set(Calendar.MONTH, contact.getManed());
-        fodselsdag.set(Calendar.DAY_OF_MONTH, contact.getDag());
+        Calendar iDay = GregorianCalendar.getInstance();
+        Calendar birthday = GregorianCalendar.getInstance();
+        Calendar isBirthday = GregorianCalendar.getInstance();
+        birthday.set(Calendar.YEAR,iDay.get(Calendar.YEAR));
+        birthday.set(Calendar.MONTH,contact.getMonth());
+        birthday.set(Calendar.DAY_OF_MONTH, contact.getDay());
+        isBirthday.set(Calendar.YEAR, contact.getYear());
+        isBirthday.set(Calendar.MONTH, contact.getMonth());
+        isBirthday.set(Calendar.DAY_OF_MONTH, contact.getDay());
 
-        int alder;
+        int age;
 
-        if(iDag.after(bursdag)) {
-            alder = iDag.get(Calendar.YEAR) - fodselsdag.get(Calendar.YEAR);
-            bursdag.add(Calendar.YEAR,1);
+        if(iDay.after(birthday)) {
+            age = iDay.get(Calendar.YEAR) - isBirthday.get(Calendar.YEAR);
+            birthday.add(Calendar.YEAR,1);
         }
         else {
-            alder = iDag.get(Calendar.YEAR) - fodselsdag.get(Calendar.YEAR)-1;
+            age = iDay.get(Calendar.YEAR) - isBirthday.get(Calendar.YEAR)-1;
         }
 
-        viewHolder.kontakt_navn.setText(contact.getNavn());
+        viewHolder.contact_name.setText(contact.getName());
 
-        viewHolder.kontakt_alder.setText("Blir" + " " +
-                (alder+1)+ " " + "den" + " " +
-                bursdag.get(Calendar.DAY_OF_MONTH) + "." +
-                (bursdag.get(Calendar.MONTH)+1) + "." +
-                bursdag.get(Calendar.YEAR));
+        viewHolder.contact_varsta.setText("Are" + " " +
+                (age+1)+ " " + "ani pe" + " " +
+                birthday.get(Calendar.DAY_OF_MONTH) + "." +
+                (birthday.get(Calendar.MONTH)+1) + "." +
+                birthday.get(Calendar.YEAR));
 
         if(position % 2 == 0){
             convertView.setBackgroundColor(Color.parseColor("#E6E6E6"));
@@ -101,13 +99,13 @@ public class LinkListAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder{
-        TextView kontakt_navn;
-        TextView kontakt_alder;
+        TextView contact_name;
+        TextView contact_varsta;
     }
 
     public void oppdaterListe(List<Contact> kontakter){
-        Log.d("ADAPTER", "er i oppdaterListe");
-        this.kontakter = kontakter;
+        Log.d("ADAPTER", "este in lista de actualizari");
+        this.contacts = kontakter;
         notifyDataSetChanged();
     }
 }

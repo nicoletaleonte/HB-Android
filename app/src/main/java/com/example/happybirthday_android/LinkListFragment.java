@@ -1,8 +1,7 @@
 package com.example.happybirthday_android;
 
-import android.support.v4.app.ListFragment;
+import android.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,23 +10,15 @@ import android.widget.Toast;
 import java.util.List;
 
 public class LinkListFragment extends ListFragment {
-    // liste
-    private List<Contact> listKontakter;
-
-    // fragment adapter
+    private List<Contact> contacts;
     LinkListAdapter adapter;
-
-    // Database handler
     DatabaseHandler db;
 
-
-    // interface som aktiviteten må kalle
     private ContactListListener listener;
 
     public interface ContactListListener{
-        void endreKontakt(int kontaktID);
+        void editContact(int contactID);
     }
-
 
     public LinkListFragment(){
 
@@ -41,7 +32,7 @@ public class LinkListFragment extends ListFragment {
             listener = (ContactListListener) getActivity();
         }
         catch (ClassCastException e){
-            throw new ClassCastException("Feil " + e.getMessage());
+            throw new ClassCastException("Fail " + e.getMessage());
         }
 
     }
@@ -53,20 +44,17 @@ public class LinkListFragment extends ListFragment {
         final ListView listView = (ListView)v.findViewById(android.R.id.list);
 
         db = new DatabaseHandler(getActivity());
-        listKontakter = db.finnAlleKontakter();
+        contacts = db.findAllContacts();
 
-        adapter = new LinkListAdapter(getActivity(), db.finnAlleKontakter());
+        adapter = new LinkListAdapter(getActivity(), db.findAllContacts());
 
         setListAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // hente ListView elementet
-                int kontaktID =  listKontakter.get(position).get_ID();
-
-                // sende kontaktID til main aktiviteten
-                listener.endreKontakt(kontaktID);
+                int contactID =  contacts.get(position).get_ID();
+                listener.editContact(contactID);
             }
         });
     }
@@ -74,17 +62,14 @@ public class LinkListFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        listKontakter = db.finnAlleKontakter();
-        adapter.oppdaterListe(db.finnAlleKontakter());
+        contacts = db.findAllContacts();
+        adapter.oppdaterListe(db.findAllContacts());
         setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        // hente ListView elementet
-        Contact contact = listKontakter.get(position);
-
-        // vis posisjonen
-        Toast.makeText(getActivity(),contact.getNavn(), Toast.LENGTH_SHORT).show();
+        Contact contact = contacts.get(position);
+        Toast.makeText(getActivity(),contact.getName(), Toast.LENGTH_SHORT).show();
     }
 }

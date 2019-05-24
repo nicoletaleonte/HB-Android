@@ -9,16 +9,16 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
-    int ar, maned, dag;
+    int year, month, day;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // vi bruker dagens dag som default for date picker
         final Calendar calendar = Calendar.getInstance();
-        ar = calendar.get(Calendar.YEAR);
-        maned = calendar.get(Calendar.MONTH);
-        dag = calendar.get(Calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(),this,ar,maned,dag);
+        return new DatePickerDialog(getActivity(),this, year, month, day);
     }
 
     @Override

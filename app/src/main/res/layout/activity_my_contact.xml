@@ -7,19 +7,19 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tekstfelt_navn"
+        android:id="@+id/text_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageView_navn"
         android:inputType="textPersonName"
-        android:hint="@string/labelNavn" />
+        android:hint="@string/labelName" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tekstfelt_tlf"
-        android:hint="@string/labelTlf"
-        android:layout_below="@+id/tekstfelt_navn"
+        android:id="@+id/text_phoneNo"
+        android:hint="@string/labelPhoneNo"
+        android:layout_below="@+id/text_name"
         android:layout_alignParentStart="false"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageView_tlf"
@@ -28,10 +28,10 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tekstfelt_dato"
-        android:hint="@string/labelFodselsdag"
+        android:id="@+id/text_date"
+        android:hint="@string/labelBirthday"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/tekstfelt_tlf"
+        android:layout_below="@+id/text_phoneNo"
         android:layout_alignParentStart="false"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/imageView_dato" />
@@ -40,21 +40,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/labelSMS"
-        android:id="@+id/knapp_sendSMS"
+        android:id="@+id/button_sendSMS"
         android:checked="false"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/tekstfelt_dato"
+        android:layout_below="@+id/text_date"
         android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView_navn"
-        android:layout_alignBottom="@+id/tekstfelt_navn"
-        android:src="@drawable/ikon_navn"
+        android:layout_alignBottom="@+id/text_name"
+        android:src="@drawable/person"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:contentDescription="@string/labelNavn"
+        android:contentDescription="@string/labelName"
         android:contextClickable="false" />
 
     <ImageView
@@ -62,22 +62,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView_tlf"
         android:layout_alignParentStart="true"
-        android:src="@drawable/ikon_tlf"
+        android:src="@drawable/phone"
         android:layout_marginBottom="5dp"
-        android:layout_alignBottom="@+id/tekstfelt_tlf"
+        android:layout_alignBottom="@+id/text_phoneNo"
         android:layout_marginRight="5dp"
-        android:contentDescription="@string/labelTlf" />
+        android:contentDescription="@string/labelPhoneNo" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView_dato"
-        android:src="@drawable/ikon_dato"
+        android:src="@drawable/date"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/tekstfelt_dato"
+        android:layout_alignBottom="@+id/text_date"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
-        android:contentDescription="@string/labelFodselsdag" />
+        android:contentDescription="@string/labelBirthday" />
 
 
 

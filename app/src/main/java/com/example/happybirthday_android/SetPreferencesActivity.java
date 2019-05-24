@@ -18,7 +18,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            // hent lagret preferences fra xml fil
             addPreferencesFromResource(R.xml.preferences);
         }
     }

@@ -12,61 +12,61 @@ import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper{
 
-    // headers
-    private static final String TABELLNAVN = "Kontakter";
+
+    private static final String TABELNAME = "Contacts";
     private static final String KEY_ID = "_ID";       // INT PK
-    private static final String KEY_NAME = "Navn";    // TEXT
-    private static final String KEY_TLF = "Tlf";      // TEXT
-    private static final String KEY_DAG = "Dag";      // INT
-    private static final String KEY_MANED = "Maned";  // INT
-    private static final String KEY_AR = "Ar";        // INT
+    private static final String KEY_NAME = "Name";    // TEXT
+    private static final String KEY_PHONENO = "PhoneNo";      // TEXT
+    private static final String KEY_DAY = "Day";      // INT
+    private static final String KEY_MONTH = "Month";  // INT
+    private static final String KEY_YEAR = "Year";        // INT
     private static final String KEY_SMS = "Sms";      // INT
 
     static int DATABASE_VERSION = 1;
-    static String DATABASE_NAVN = "DB_Kontakter";
+    static String DATABASE_NAME = "DB_Contacts";
 
-    // konstruktors
+
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     public DatabaseHandler(Context context){
-        super(context, DATABASE_NAVN, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String lagTabell = "CREATE TABLE " + TABELLNAVN + " (" + KEY_ID + " INTEGER PRIMARY KEY, " +
-                KEY_NAME + " TEXT, " + KEY_TLF + " TEXT, " + KEY_DAG + " INTEGER, " +
-                KEY_MANED + " INTEGER, " +  KEY_AR + " INTEGER, " + KEY_SMS + " INTEGER" + ")";
-        db.execSQL(lagTabell);
+        String teamTable = "CREATE TABLE " + TABELNAME + " (" + KEY_ID + " INTEGER PRIMARY KEY, " +
+                KEY_NAME + " TEXT, " + KEY_PHONENO + " TEXT, " + KEY_DAY + " INTEGER, " +
+                KEY_MONTH + " INTEGER, " + KEY_YEAR + " INTEGER, " + KEY_SMS + " INTEGER" + ")";
+        db.execSQL(teamTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try{
-            db.execSQL("DROP TABLE IF EXISTS " + TABELLNAVN);
+            db.execSQL("DROP TABLE IF EXISTS " + TABELNAME);
         }
         catch (Exception e){
-            Log.d("DATABASE","onUpgrade feil "+ e.toString());
+            Log.d("DATABASE","onUpgrade fail "+ e.toString());
         }
     }
 
-    // legg til kontakt
-    public boolean leggTilKontakt(Contact contact){
+
+    public boolean addContact(Contact contact){
         try {
             SQLiteDatabase db = this.getWritableDatabase();
 
-            ContentValues values = new ContentValues();     // nøkkel-verdi par lagres her
+            ContentValues values = new ContentValues();
 
-            values.put(KEY_NAME, contact.getNavn());
-            values.put(KEY_TLF, contact.getTelefonnr());
-            values.put(KEY_DAG, contact.getDag());
-            values.put(KEY_MANED, contact.getManed());
-            values.put(KEY_AR, contact.getAr());
+            values.put(KEY_NAME, contact.getName());
+            values.put(KEY_PHONENO, contact.getPhoneNo());
+            values.put(KEY_DAY, contact.getDay());
+            values.put(KEY_MONTH, contact.getMonth());
+            values.put(KEY_YEAR, contact.getYear());
             values.put(KEY_SMS, contact.isSendSMS() ? 1 : 0);
 
-            db.insert(TABELLNAVN, null, values);
+            db.insert(TABELNAME, null, values);
 
             db.close();
             return true;
@@ -76,10 +76,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
     }
 
-    // finn alle kontakter
-    public List<Contact> finnAlleKontakter(){
-        List<Contact> kontaktList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + TABELLNAVN;
+    public List<Contact> findAllContacts(){
+        List<Contact> contacts = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TABELNAME;
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
@@ -88,41 +87,41 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 do {
                     Contact contact = new Contact();
                     contact.set_ID(Integer.parseInt(cursor.getString(0)));
-                    contact.setNavn(cursor.getString(1));
-                    contact.setTelefonnr(cursor.getString(2));
-                    contact.setDag(Integer.parseInt(cursor.getString(3)));
-                    contact.setManed(Integer.parseInt(cursor.getString(4)));
-                    contact.setAr(Integer.parseInt(cursor.getString(5)));
+                    contact.setName(cursor.getString(1));
+                    contact.setPhoneNo(cursor.getString(2));
+                    contact.setDay(Integer.parseInt(cursor.getString(3)));
+                    contact.setMonth(Integer.parseInt(cursor.getString(4)));
+                    contact.setYear(Integer.parseInt(cursor.getString(5)));
                     contact.setSendSMS(Integer.parseInt(cursor.getString(6)) == 0 ? false : true);
-                    kontaktList.add(contact);
+                    contacts.add(contact);
                 } while (cursor.moveToNext());
             }
             cursor.close();
             db.close();
-            return kontaktList;
+            return contacts;
         }
         catch (Exception e){
-            Log.d("DATABASE","Feil "+ e.toString());
+            Log.d("DATABASE","Fail "+ e.toString());
             return null;
         }
     }
 
-    // oppdatere kontakt
-    public int oppdaterKontakt(Contact contact){
+
+    public int updateContact(Contact contact){
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(KEY_NAME, contact.getNavn());
-            values.put(KEY_TLF, contact.getTelefonnr());
-            values.put(KEY_DAG, contact.getDag());
-            values.put(KEY_MANED, contact.getManed());
-            values.put(KEY_AR, contact.getAr());
+            values.put(KEY_NAME, contact.getName());
+            values.put(KEY_PHONENO, contact.getPhoneNo());
+            values.put(KEY_DAY, contact.getDay());
+            values.put(KEY_MONTH, contact.getMonth());
+            values.put(KEY_YEAR, contact.getYear());
             if (contact.isSendSMS())
                 values.put(KEY_SMS, 1);
             else
                 values.put(KEY_SMS, 0);
 
-            int endret = db.update(TABELLNAVN, values, KEY_ID + "=?", new String[]{String.valueOf(contact.get_ID())});
+            int endret = db.update(TABELNAME, values, KEY_ID + "=?", new String[]{String.valueOf(contact.get_ID())});
             db.close();
             return endret;
         }
@@ -132,23 +131,23 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         }
     }
 
-    // slette kontakt
-    public void slettKontakt(Contact contact){
+
+    public void deleteContact(Contact contact){
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete(TABELLNAVN, KEY_ID + "=?", new String[]{String.valueOf(contact.get_ID())});
+            db.delete(TABELNAME, KEY_ID + "=?", new String[]{String.valueOf(contact.get_ID())});
             db.close();
         }
         catch (Exception e){
-            Log.d("DATABASE","Feil "+ e.toString());
+            Log.d("DATABASE","Fail "+ e.toString());
         }
     }
 
-    // finn kontakt
-    public Contact finnKontakt(int id){
+
+    public Contact findContactById(int id){
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            Cursor cursor = db.query(TABELLNAVN, new String[]{KEY_ID, KEY_NAME, KEY_TLF, KEY_DAG, KEY_MANED, KEY_AR, KEY_SMS}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+            Cursor cursor = db.query(TABELNAME, new String[]{KEY_ID, KEY_NAME, KEY_PHONENO, KEY_DAY, KEY_MONTH, KEY_YEAR, KEY_SMS}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
 
             if (cursor != null)
                 cursor.moveToFirst();
@@ -159,14 +158,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             return contact;
         }
         catch (Exception e){
-            Log.d("DATABASE","Feil "+ e.toString());
+            Log.d("DATABASE","Fail "+ e.toString());
             return null;
         }
     }
 
-    public List<Contact> hentAlleSomHarBursdag(String maned, String dag){
+    public List<Contact> getAllBirthdays(String maned, String dag){
         List<Contact> contacts = new ArrayList<>();
-        String sql = "SELECT * FROM " + TABELLNAVN + " WHERE " + KEY_MANED + " = " + maned + " AND " + KEY_DAG + " = " + dag;
+        String sql = "SELECT * FROM " + TABELNAME + " WHERE " + KEY_MONTH + " = " + maned + " AND " + KEY_DAY + " = " + dag;
         try {
             SQLiteDatabase db = this.getWritableDatabase();
             Cursor cursor = db.rawQuery(sql, null);
@@ -175,11 +174,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 do {
                     Contact contact = new Contact();
                     contact.set_ID(Integer.parseInt(cursor.getString(0)));
-                    contact.setNavn(cursor.getString(1));
-                    contact.setTelefonnr(cursor.getString(2));
-                    contact.setDag(Integer.parseInt(cursor.getString(3)));
-                    contact.setManed(Integer.parseInt(cursor.getString(4)));
-                    contact.setAr(Integer.parseInt(cursor.getString(5)));
+                    contact.setName(cursor.getString(1));
+                    contact.setPhoneNo(cursor.getString(2));
+                    contact.setDay(Integer.parseInt(cursor.getString(3)));
+                    contact.setMonth(Integer.parseInt(cursor.getString(4)));
+                    contact.setYear(Integer.parseInt(cursor.getString(5)));
                     contact.setSendSMS(Integer.parseInt(cursor.getString(6)) == 0 ? false : true);
                     contacts.add(contact);
                 } while (cursor.moveToNext());
@@ -189,7 +188,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             return contacts;
         }
         catch (Exception e){
-            Log.d("DATABASE","Feil "+ e.getMessage());
+            Log.d("DATABASE","Fail "+ e.getMessage());
             return null;
         }
     }

@@ -1,34 +1,32 @@
 package com.example.happybirthday_android;
 
-
 public class Contact {
     private int _ID;
-    private String Navn;
-    private String Telefonnr;
-    private int dag;
-    private int maned;
-    private int ar;
+    private String name;
+    private String phoneNo;
+    private int day;
+    private int month;
+    private int year;
     private boolean SendSMS;
 
-    // konstruktors
     public Contact(){}
 
-    public Contact(String n, String t, int d, int m, int a, boolean sms){
-        Navn = n;
-        Telefonnr = t;
-        dag = d;
-        maned = m;
-        ar = a;
+    public Contact(String n, String p, int d, int m, int y, boolean sms){
+        name = n;
+        phoneNo = p;
+        day = d;
+        month = m;
+        year = y;
         SendSMS = sms;
     }
 
-    public Contact(int id, String n, String t, int d, int m, int a, boolean sms){
+    public Contact(int id, String n, String p, int d, int m, int y, boolean sms){
         _ID = id;
-        Navn = n;
-        Telefonnr = t;
-        dag = d;
-        maned = m;
-        ar = a;
+        name = n;
+        phoneNo = p;
+        day = d;
+        month = m;
+        year = y;
         SendSMS = sms;
     }
 
@@ -41,36 +39,36 @@ public class Contact {
         this._ID = _ID;
     }
 
-    public int getAr() {
-        return ar;
+    public int getYear() {
+        return year;
     }
 
-    public void setAr(int ar) {
-        this.ar = ar;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public int getDag() {
-        return dag;
+    public int getDay() {
+        return day;
     }
 
-    public void setDag(int dag) {
-        this.dag = dag;
+    public void setDay(int day) {
+        this.day = day;
     }
 
-    public int getManed() {
-        return maned;
+    public int getMonth() {
+        return month;
     }
 
-    public void setManed(int maned) {
-        this.maned = maned;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
-    public String getNavn() {
-        return Navn;
+    public String getName() {
+        return name;
     }
 
-    public void setNavn(String navn) {
-        Navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isSendSMS() {
@@ -81,11 +79,11 @@ public class Contact {
         SendSMS = sendSMS;
     }
 
-    public String getTelefonnr() {
-        return Telefonnr;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setTelefonnr(String telefonnr) {
-        Telefonnr = telefonnr;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 }

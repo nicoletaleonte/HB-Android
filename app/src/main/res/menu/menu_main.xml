@@ -5,17 +5,17 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/leggTilKontakt"
-        android:title="@string/leggTilKontakt"
+        android:id="@+id/addContact"
+        android:title="@string/addContact"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@drawable/legg_til_kontakt"/>
+        android:icon="@drawable/add_contact"/>
     <item
         android:id="@+id/action_settings"
         android:title="@string/stillinger"
         android:orderInCategory="200"
         app:showAsAction="always"
-        android:icon="@drawable/stillinger" />
+        android:icon="@drawable/settings" />
 
 
 </menu>

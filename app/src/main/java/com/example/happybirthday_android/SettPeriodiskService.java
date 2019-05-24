@@ -23,44 +23,44 @@ public class SettPeriodiskService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Calendar cal = Calendar.getInstance();
         int time;
-        int minutt;
+        int minute;
 
-        Log.d("PERIODISKSERVICE", "Tidspunkt: " + MainActivity.tidspunkt);
-        if(MainActivity.tidspunkt == null) {
-            // sette default tidspunkt 08:00
+        Log.d("PERIODISKSERVICE", "Timp: " + MainActivity.time);
+        if(MainActivity.time == null) {
+            // sette default time 08:00
             time = 8;
-            minutt = 0;
+            minute = 0;
         }
         else
         {
-            String tidspunkt = MainActivity.tidspunkt;
-            String timeStreng = "";
-            String minuttStreng = "";
+            String timp = MainActivity.time;
+            String timps = "";
+            String minutes = "";
 
             // konvertere klokkeslett fra string til hh:mm
-            for(int i = 0; i < tidspunkt.length(); i++){
-                if(tidspunkt.charAt(i) != ':')
-                    timeStreng += tidspunkt.charAt(i);
+            for(int i = 0; i < timp.length(); i++){
+                if(timp.charAt(i) != ':')
+                    timps += timp.charAt(i);
                 else
                     break;
             }
 
-            for(int i = tidspunkt.length()-1; i >= 0; i--){
-                if(tidspunkt.charAt(i) != ':')
-                    minuttStreng += tidspunkt.charAt(i);
+            for(int i = timp.length()-1; i >= 0; i--){
+                if(timp.charAt(i) != ':')
+                    minutes += timp.charAt(i);
                 else
                     break;
             }
 
-            time = Integer.parseInt(timeStreng);
-            minutt = Integer.parseInt(minuttStreng);
+            time = Integer.parseInt(timps);
+            minute = Integer.parseInt(minutes);
         }
 
         cal.set(Calendar.HOUR_OF_DAY, time);
-        cal.set(Calendar.MINUTE, minutt);
+        cal.set(Calendar.MINUTE, minute);
         cal.set(Calendar.SECOND, 0);
         cal = Calendar.getInstance();
-        Intent i = new Intent(this, Varsling.class);
+        Intent i = new Intent(this, Warning.class);
         PendingIntent pintent = PendingIntent.getService(this,0,i,0);
         AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pintent);
