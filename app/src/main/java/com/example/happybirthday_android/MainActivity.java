@@ -1,5 +1,7 @@
 package com.example.happybirthday_android;
 
+import android.Manifest;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements LinkListFragment.
     public static Boolean warning = true;
     public static String time = "8:0";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +28,13 @@ public class MainActivity extends AppCompatActivity implements LinkListFragment.
 
         DatabaseHandler db = new DatabaseHandler(this);
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS},1);
+
         SMS = PreferenceManager.getDefaultSharedPreferences(this).getString("edittext_preference", "Felicitari pentru aceasta zi!");
         sendAllSMS = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("checkbox_preference", true);
         warning = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("warningCheckBox", true);
         time = PreferenceManager.getDefaultSharedPreferences(this).getString("preferences_time", "8:0");
+
     }
 
     @Override
@@ -77,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements LinkListFragment.
         sendAllSMS = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("checkbox_preference", true);
         warning = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("warningCheckBox", true);
         time = PreferenceManager.getDefaultSharedPreferences(this).getString("preferences_time", "8:0");
+
 
 
         Intent i = new Intent();

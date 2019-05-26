@@ -8,23 +8,28 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TimePicker;
 
+//setare timp pentru timePickerul de trimis mesaje in setari
 public class TimePreference extends DialogPreference {
     private int lastHour = 0;
     private int lastMinute = 0;
     private TimePicker picker = null;
 
+    // ia ora, o pune in vector
     public static int getHour(String time) {
         String[] pieces = time.split(":");
 
         return (Integer.parseInt(pieces[0]));
     }
 
+    //ia minutul il pune in  vector
     public static int getMinute(String time) {
         String[] pieces = time.split(":");
 
         return (Integer.parseInt(pieces[1]));
     }
 
+
+    //afisare set si cencel pentru timePicker
     public TimePreference(Context ctxt, AttributeSet attrs) {
         super(ctxt, attrs);
 
@@ -32,6 +37,7 @@ public class TimePreference extends DialogPreference {
         setNegativeButtonText("Cancel");
     }
 
+    //display timePicker
     @Override
     protected View onCreateDialogView() {
         picker = new TimePicker(getContext());
@@ -39,6 +45,7 @@ public class TimePreference extends DialogPreference {
         return (picker);
     }
 
+    //afiseaza ultima ora pusa pe ceas
     @Override
     protected void onBindDialogView(View v) {
         super.onBindDialogView(v);
@@ -47,6 +54,7 @@ public class TimePreference extends DialogPreference {
         picker.setCurrentMinute(lastMinute);
     }
 
+    //setarea efectiva a orei dupa ce s-a inchis fereastra
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
@@ -63,6 +71,7 @@ public class TimePreference extends DialogPreference {
         }
     }
 
+    //trimite sms uri la ora default
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
         return (a.getString(index));

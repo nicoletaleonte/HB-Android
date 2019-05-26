@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.List;
 
-public class Warning extends Service{
+public class LogicNotificationAndSendSMS extends Service{
 
     @Nullable
     @Override
@@ -23,7 +23,6 @@ public class Warning extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         DatabaseHandler db = new DatabaseHandler(this);
 
         Calendar calendar = Calendar.getInstance();
@@ -38,10 +37,10 @@ public class Warning extends Service{
             return super.onStartCommand(intent, flags, startId);
         }
         else {
-            boolean isnotification = MainActivity.warning;
+            boolean isNotification = MainActivity.warning;
             boolean sendSMS = MainActivity.sendAllSMS;
 
-            if (isnotification) {
+            if (isNotification) {
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 String showTitle = "Birthday";
                 String showSummary;
@@ -49,9 +48,9 @@ public class Warning extends Service{
                 if (all == 1) {
                     Contact contact = contacts.get(0);
                     int age = calendar.get(Calendar.YEAR) - contact.getYear();
-                    showSummary = contact.getName() + " împlineste " + age + " de ani";
+                    showSummary = contact.getName() + " împlineste " + age + " de ani.";
                 } else {
-                    showSummary = "La " + all + " multi ani tuturor contactelor tale...";
+                    showSummary = "La " + all + " multi ani tuturor...";
                 }
 
                 Notification notification = new Notification.Builder(this)
@@ -64,7 +63,6 @@ public class Warning extends Service{
             }
 
             if (sendSMS){
-
                 for (Contact k : contacts) {
                     String phoneNo = k.getPhoneNo();
                     String sms = MainActivity.SMS;
@@ -74,6 +72,7 @@ public class Warning extends Service{
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(phoneNo, null, sms, null, null);
                             Toast.makeText(getApplicationContext(), "SMS trimis la " + k.getName(), Toast.LENGTH_LONG).show();
+
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "SMS-ul nu s-a trimis la " + k.getName(), Toast.LENGTH_LONG).show();
                         }

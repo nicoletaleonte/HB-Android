@@ -12,7 +12,7 @@
         android:icon="@drawable/add_contact"/>
     <item
         android:id="@+id/action_settings"
-        android:title="@string/stillinger"
+        android:title="@string/settings"
         android:orderInCategory="200"
         app:showAsAction="always"
         android:icon="@drawable/settings" />

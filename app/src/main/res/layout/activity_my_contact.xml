@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/MyContactLayout">
 
+    <!--pagina de adaugare contacte-->
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
         android:layout_below="@+id/text_name"
         android:layout_alignParentStart="false"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/imageView_tlf"
+        android:layout_toEndOf="@+id/imageView_phone"
         android:inputType="phone" />
 
     <EditText
@@ -34,7 +35,7 @@
         android:layout_below="@+id/text_phoneNo"
         android:layout_alignParentStart="false"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/imageView_dato" />
+        android:layout_toEndOf="@+id/imageView_date" />
 
     <Switch
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView_tlf"
+        android:id="@+id/imageView_phone"
         android:layout_alignParentStart="true"
         android:src="@drawable/phone"
         android:layout_marginBottom="5dp"
@@ -71,14 +72,12 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView_dato"
+        android:id="@+id/imageView_date"
         android:src="@drawable/date"
         android:layout_alignParentStart="true"
         android:layout_alignBottom="@+id/text_date"
         android:layout_marginBottom="5dp"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/labelBirthday" />
-
-
 
 </RelativeLayout>

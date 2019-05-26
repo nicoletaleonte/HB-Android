@@ -182,7 +182,7 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
 
                 alertDialogBuilder
                         .setMessage(context.getResources().getString(R.string.deleteDialogMessage))
-                        .setPositiveButton(context.getResources().getString(R.string.deleteDialogJa),
+                        .setPositiveButton(context.getResources().getString(R.string.deleteDialogDa),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         db.deleteContact(editContact);
@@ -191,7 +191,7 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                                         finish();
                                     }
                                 })
-                        .setNegativeButton(context.getResources().getString(R.string.deleteeDialogNei),
+                        .setNegativeButton(context.getResources().getString(R.string.deleteDialogNu),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         dialog.cancel();

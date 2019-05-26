@@ -103,9 +103,9 @@ public class LinkListAdapter extends BaseAdapter {
         TextView contact_varsta;
     }
 
-    public void oppdaterListe(List<Contact> kontakter){
+    public void oppdaterListe(List<Contact> contacts){
         Log.d("ADAPTER", "este in lista de actualizari");
-        this.contacts = kontakter;
+        this.contacts = contacts;
         notifyDataSetChanged();
     }
 }

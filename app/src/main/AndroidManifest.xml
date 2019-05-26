@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.happybirthday_android">
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" ></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" ></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -31,8 +31,8 @@
             android:label="@string/preferanser" >
         </activity>
 
-        <service android:name=".Warning"></service>
-        <service android:name=".SettPeriodiskService"></service>
+        <service android:name=".LogicNotificationAndSendSMS"></service>
+        <service android:name=".SetPeriodicService"></service>
 
         <receiver android:name=".Receiver"
             android:enabled="true"

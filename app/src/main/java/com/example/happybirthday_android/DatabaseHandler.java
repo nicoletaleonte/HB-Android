@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper{
-
-
     private static final String TABELNAME = "Contacts";
     private static final String KEY_ID = "_ID";       // INT PK
     private static final String KEY_NAME = "Name";    // TEXT
@@ -24,7 +22,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     static int DATABASE_VERSION = 1;
     static String DATABASE_NAME = "DB_Contacts";
-
 
     public DatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -51,7 +48,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             Log.d("DATABASE","onUpgrade fail "+ e.toString());
         }
     }
-
 
     public boolean addContact(Contact contact){
         try {
@@ -126,7 +122,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             return endret;
         }
         catch (Exception e){
-            Log.d("DATABASE","Feil "+ e.toString());
+            Log.d("DATABASE","Fail "+ e.toString());
             return -1;
         }
     }

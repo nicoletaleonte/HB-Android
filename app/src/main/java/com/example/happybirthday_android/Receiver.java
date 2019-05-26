@@ -6,9 +6,11 @@ import android.content.Intent;
 
 
 public class Receiver extends BroadcastReceiver{
+
+    //folosit pentru sms-uri
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, SettPeriodiskService.class);
+        Intent i = new Intent(context, SetPeriodicService.class);
         context.startService(i);
     }
 }

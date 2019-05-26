@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 public class MyContact extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     EditText editTextName;
-    EditText editTextphoneNo;
+    EditText editTextPhoneNo;
     TextView editTextDate;
     Switch buttonSendSMS;
     int dd, mm, yy;
@@ -47,7 +47,7 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
 
 
         editTextName = (EditText) findViewById(R.id.text_name);
-        editTextphoneNo = (EditText) findViewById(R.id.text_phoneNo);
+        editTextPhoneNo = (EditText) findViewById(R.id.text_phoneNo);
         editTextDate = (EditText) findViewById(R.id.text_date);
         buttonSendSMS = (Switch) findViewById(R.id.button_sendSMS);
 
@@ -128,17 +128,17 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
 
         switch(id){
             case R.id.action_lagre :
-                if(checkFilds()) {
-                    Contact innKontakt = new Contact();
-                    innKontakt.setName(editTextName.getText().toString());
-                    innKontakt.setPhoneNo(editTextphoneNo.getText().toString());
-                    innKontakt.setDay(dd);
-                    innKontakt.setMonth(mm);
-                    innKontakt.setYear(yy);
-                    innKontakt.setSendSMS(sendSMS);
-                    if(db.addContact(innKontakt)) {
+                if(checkFields()) {
+                    Contact contact = new Contact();
+                    contact.setName(editTextName.getText().toString());
+                    contact.setPhoneNo(editTextPhoneNo.getText().toString());
+                    contact.setDay(dd);
+                    contact.setMonth(mm);
+                    contact.setYear(yy);
+                    contact.setSendSMS(sendSMS);
+                    if(db.addContact(contact)) {
                         MainActivity.dbEdit = true;
-                        Toast.makeText(getApplicationContext(), innKontakt.getName() + " added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), contact.getName() + " added", Toast.LENGTH_SHORT).show();
                         finish();
                         return true;
                     }
@@ -158,10 +158,10 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
         }
     }
 
-    private boolean checkFilds(){
+    private boolean checkFields(){
 
         if(editTextName.getText().toString().equals("") ||
-                editTextphoneNo.getText().toString().equals("") ||
+                editTextPhoneNo.getText().toString().equals("") ||
                 editTextDate.getText().toString().equals("")) {
             regexFail = "Gresit - trebuie sa completezi toate campurile.";
             Toast.makeText(this, regexFail, Toast.LENGTH_LONG).show();
@@ -175,7 +175,7 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
             Pattern patternDate = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
 
             Matcher matcherName = patternName.matcher(editTextName.getText().toString());
-            Matcher matcherPhoneNo = patternPhoneNo.matcher(editTextphoneNo.getText().toString());
+            Matcher matcherPhoneNo = patternPhoneNo.matcher(editTextPhoneNo.getText().toString());
             Matcher matcherDate = patternDate.matcher(editTextDate.getText().toString());
 
             if (!matcherName.find()) {
@@ -200,7 +200,6 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
             }
         }
     }
-
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
