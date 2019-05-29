@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +24,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EditContact extends AppCompatActivity implements OnClickListener, CompoundButton.OnCheckedChangeListener{
+public class EditContact extends AppCompatActivity implements OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     Context context = this;
 
@@ -77,7 +77,7 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -97,11 +97,10 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                 dd = Integer.parseInt(na.substring(0, 2));
                 mm = Integer.parseInt(na.substring(3, 5)) - 1;
                 yy = Integer.parseInt(na.substring(6, 10));
-                if(hasFocus){
-                    new DatePickerDialog(EditContact.this,date, yy,mm,dd).show();
-                }
-                else{
-                    new DatePickerDialog(EditContact.this,date, yy,mm,dd).hide();
+                if (hasFocus) {
+                    new DatePickerDialog(EditContact.this, date, yy, mm, dd).show();
+                } else {
+                    new DatePickerDialog(EditContact.this, date, yy, mm, dd).hide();
                 }
             }
         });
@@ -109,19 +108,18 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
         editTextDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextDate.getText().equals("")) {
+                if (editTextDate.getText().equals("")) {
                     yy = birthday.get(Calendar.YEAR);
                     mm = birthday.get(Calendar.MONTH);
                     dd = birthday.get(Calendar.DAY_OF_MONTH);
-                    new DatePickerDialog(EditContact.this,date, yy,mm,dd).show();
-                }
-                else{
+                    new DatePickerDialog(EditContact.this, date, yy, mm, dd).show();
+                } else {
                     String na = editTextDate.getText().toString();
-                    dd = Integer.parseInt(na.substring(0,2));
+                    dd = Integer.parseInt(na.substring(0, 2));
                     mm = Integer.parseInt(na.substring(3, 5)) - 1;
-                    yy = Integer.parseInt(na.substring(6,10));
+                    yy = Integer.parseInt(na.substring(6, 10));
 
-                    new DatePickerDialog(EditContact.this, date, yy,mm,dd).show();
+                    new DatePickerDialog(EditContact.this, date, yy, mm, dd).show();
                 }
             }
         });
@@ -140,12 +138,11 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch(id){
-            case R.id.action_lagre :
-                if(checkCampuri()) {
+        switch (id) {
+            case R.id.action_lagre:
+                if (checkFields()) {
 
-                    if(dd == 0 && mm == 0 && yy == 0)
-                    {
+                    if (dd == 0 && mm == 0 && yy == 0) {
                         dd = editContact.getDay();
                         mm = editContact.getMonth();
                         yy = editContact.getYear();
@@ -157,16 +154,14 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                     editContact.setYear(yy);
                     editContact.setSendSMS(sendSMS);
 
-                    if(db.updateContact(editContact) != -1){
+                    if (db.updateContact(editContact) != -1) {
                         MainActivity.dbEdit = true;
                         finish();
                         return true;
-                    }
-                    else{
+                    } else {
                         return false;
                     }
-                }
-                else {
+                } else {
                     return false;
                 }
 
@@ -184,7 +179,7 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                         .setMessage(context.getResources().getString(R.string.deleteDialogMessage))
                         .setPositiveButton(context.getResources().getString(R.string.deleteDialogDa),
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         db.deleteContact(editContact);
                                         MainActivity.dbEdit = true;
                                         Toast.makeText(context, editContact.getName() + " deleted", Toast.LENGTH_SHORT).show();
@@ -193,7 +188,7 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                                 })
                         .setNegativeButton(context.getResources().getString(R.string.deleteDialogNu),
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
+                                    public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
                                     }
                                 });
@@ -201,33 +196,31 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
                 alertDialog.show();
-                return  true;
+                return true;
 
-            default :
+            default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
     public void onClick(View v) {
-        if(v == editTextDate){
+        if (v == editTextDate) {
             datePickerDialog.show();
         }
     }
 
     // check
-    private boolean checkCampuri(){
+    private boolean checkFields() {
         // sjekk for tomme felter
-        if(editTextName.getText().toString().equals("") ||
+        if (editTextName.getText().toString().equals("") ||
                 editTextPhoneNo.getText().toString().equals("") ||
                 editTextDate.getText().toString().equals("")) {
             regexFail = "Greșit - trebuie sa completezi toate campurile";
             Toast.makeText(this, regexFail, Toast.LENGTH_LONG).show();
             regexFail = "";
             return false;
-        }
-
-        else {
+        } else {
             Pattern patternName = Pattern.compile("^[\\p{L} .'-]+$");
             Pattern patternPhoneNo = Pattern.compile("^\\+?[0-9. ()-]{5,20}$");
             Pattern patternDate = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
@@ -248,12 +241,11 @@ public class EditContact extends AppCompatActivity implements OnClickListener, C
                 regexFail += "Data gresita\n";
             }
 
-            if (!regexFail.equals("")){
+            if (!regexFail.equals("")) {
                 Toast.makeText(this, regexFail, Toast.LENGTH_LONG).show();
                 regexFail = "";
                 return false;
-            }
-            else{
+            } else {
                 return true;
             }
         }

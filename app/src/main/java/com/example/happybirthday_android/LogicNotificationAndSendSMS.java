@@ -1,19 +1,19 @@
 package com.example.happybirthday_android;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-
-
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.support.annotation.Nullable;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.List;
 
-public class LogicNotificationAndSendSMS extends Service{
+public class LogicNotificationAndSendSMS extends Service {
 
     @Nullable
     @Override
@@ -29,14 +29,13 @@ public class LogicNotificationAndSendSMS extends Service{
         String month = Integer.toString(calendar.get(Calendar.MONTH));
         String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
 
-        List<Contact> contacts = db.getAllBirthdays(month,day);
+        List<Contact> contacts = db.getAllBirthdays(month, day);
 
         int all = contacts.size();
 
-        if(all == 0){
+        if (all == 0) {
             return super.onStartCommand(intent, flags, startId);
-        }
-        else {
+        } else {
             boolean isNotification = MainActivity.warning;
             boolean sendSMS = MainActivity.sendAllSMS;
 
@@ -62,12 +61,13 @@ public class LogicNotificationAndSendSMS extends Service{
                 notificationManager.notify(0, notification);
             }
 
-            if (sendSMS){
+            if (sendSMS) {
+                Log.d("ADAPTER", "este in lista de actualizari2222222");
                 for (Contact k : contacts) {
                     String phoneNo = k.getPhoneNo();
                     String sms = MainActivity.SMS;
 
-                    if(k.isSendSMS()) {
+                    if (k.isSendSMS()) {
                         try {
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(phoneNo, null, sms, null, null);

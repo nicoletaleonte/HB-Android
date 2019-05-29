@@ -9,9 +9,18 @@ public class Contact {
     private int year;
     private boolean SendSMS;
 
-    public Contact(){}
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "name='" + name + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                '}';
+    }
 
-    public Contact(String n, String p, int d, int m, int y, boolean sms){
+    public Contact() {
+    }
+
+    public Contact(String n, String p, int d, int m, int y, boolean sms) {
         name = n;
         phoneNo = p;
         day = d;
@@ -20,7 +29,7 @@ public class Contact {
         SendSMS = sms;
     }
 
-    public Contact(int id, String n, String p, int d, int m, int y, boolean sms){
+    public Contact(int id, String n, String p, int d, int m, int y, boolean sms) {
         _ID = id;
         name = n;
         phoneNo = p;

@@ -1,8 +1,8 @@
 package com.example.happybirthday_android;
 
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +56,7 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
         calendar = Calendar.getInstance();
         tempCalendar = Calendar.getInstance();
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -126,9 +126,9 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
 
         int id = item.getItemId();
 
-        switch(id){
-            case R.id.action_lagre :
-                if(checkFields()) {
+        switch (id) {
+            case R.id.action_lagre:
+                if (checkFields()) {
                     Contact contact = new Contact();
                     contact.setName(editTextName.getText().toString());
                     contact.setPhoneNo(editTextPhoneNo.getText().toString());
@@ -136,40 +136,37 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
                     contact.setMonth(mm);
                     contact.setYear(yy);
                     contact.setSendSMS(sendSMS);
-                    if(db.addContact(contact)) {
+
+                    if (db.addContact(contact)) {
                         MainActivity.dbEdit = true;
                         Toast.makeText(getApplicationContext(), contact.getName() + " added", Toast.LENGTH_SHORT).show();
                         finish();
                         return true;
-                    }
-                    else{
+                    } else {
                         return false;
                     }
-                }
-                else {
+                } else {
                     return false;
                 }
 
             case R.id.action_cancel:
                 finish();
                 return true;
-            default :
+            default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private boolean checkFields(){
+    private boolean checkFields() {
 
-        if(editTextName.getText().toString().equals("") ||
+        if (editTextName.getText().toString().equals("") ||
                 editTextPhoneNo.getText().toString().equals("") ||
                 editTextDate.getText().toString().equals("")) {
             regexFail = "Gresit - trebuie sa completezi toate campurile.";
             Toast.makeText(this, regexFail, Toast.LENGTH_LONG).show();
             regexFail = "";
             return false;
-        }
-
-        else {
+        } else {
             Pattern patternName = Pattern.compile("^[\\p{L} .'-]+$");
             Pattern patternPhoneNo = Pattern.compile("^\\+?[0-9. ()-]{5,20}$");
             Pattern patternDate = Pattern.compile("^\\d{2}-\\d{2}-\\d{4}$");
@@ -190,12 +187,11 @@ public class MyContact extends AppCompatActivity implements CompoundButton.OnChe
                 regexFail += "Data gresita\n";
             }
 
-            if (!regexFail.equals("")){
+            if (!regexFail.equals("")) {
                 Toast.makeText(this, regexFail, Toast.LENGTH_LONG).show();
                 regexFail = "";
                 return false;
-            }
-            else{
+            } else {
                 return true;
             }
         }

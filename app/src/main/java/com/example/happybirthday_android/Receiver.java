@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 
-public class Receiver extends BroadcastReceiver{
+public class Receiver extends BroadcastReceiver {
 
     //folosit pentru sms-uri
     @Override
@@ -13,4 +13,5 @@ public class Receiver extends BroadcastReceiver{
         Intent i = new Intent(context, SetPeriodicService.class);
         context.startService(i);
     }
+
 }

@@ -16,22 +16,20 @@ public class LinkListFragment extends ListFragment {
 
     private ContactListListener listener;
 
-    public interface ContactListListener{
+    public interface ContactListListener {
         void editContact(int contactID);
     }
 
-    public LinkListFragment(){
-
+    public LinkListFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try{
+        try {
             listener = (ContactListListener) getActivity();
-        }
-        catch (ClassCastException e){
+        } catch (ClassCastException e) {
             throw new ClassCastException("Fail " + e.getMessage());
         }
 
@@ -41,7 +39,7 @@ public class LinkListFragment extends ListFragment {
 
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        final ListView listView = (ListView)v.findViewById(android.R.id.list);
+        final ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         db = new DatabaseHandler(getActivity());
         contacts = db.findAllContacts();
@@ -53,7 +51,7 @@ public class LinkListFragment extends ListFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int contactID =  contacts.get(position).get_ID();
+                int contactID = contacts.get(position).get_ID();
                 listener.editContact(contactID);
             }
         });
@@ -63,13 +61,13 @@ public class LinkListFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         contacts = db.findAllContacts();
-        adapter.oppdaterListe(db.findAllContacts());
+        adapter.updateList(db.findAllContacts());
         setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Contact contact = contacts.get(position);
-        Toast.makeText(getActivity(),contact.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), contact.getName(), Toast.LENGTH_SHORT).show();
     }
 }
