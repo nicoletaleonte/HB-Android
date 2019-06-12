@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">HappyBirthday-Android</string>
+    <string name="app_name">Reminder</string>
+    <string name="settings">Setari pentru aplicatie.</string>
+    <string name="addContact">Adauga un contact</string>
+    <string name="cancel">Cancel</string>
+    <string name="labelName">Name</string>
+    <string name="labelPhoneNo">PhoneNumber</string>
+    <string name="labelBirthday">Birthday</string>
+    <string name="labelSMS">Send sms</string>
+
+    <string name="title_activity_my_contact">My Contact</string>
+
+    <string name="title_activity_edit_contact">Edit Contact</string>
+    <string name="deleteDialogTitle">Delete Contact</string>
+    <string name="deleteDialogMessage">Vreti sa stergeti contactul?</string>
+    <string name="deleteDialogDa">Delete</string>
+    <string name="deleteDialogNu">Cancel</string>
+
+    <string name="preferanser">Setari</string>
+    <string name="preferanserSmsTitle">Continut SMS</string>
+    <string name="preferanserSmsSummary">Setare text implicit pentru sms.</string>
+    <string name="preferanserSendSmsTitle">Functia SMS</string>
+    <string name="preferanserSendSmsSummary">Activare/Dezactivare functie pentru trimitere sms.</string>
+    <string name="preferences_notification_title">Notificare</string>
+    <string name="preferences_notification_summary">Actvare/Dezactivare functie pentru trimitere notificare.</string>
+    <string name="preferences_time_title">Timp</string>
+    <string name="preferences_time_summary">Setare ora trimitere sms.</string>
+
 </resources>

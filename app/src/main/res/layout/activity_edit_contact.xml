@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/EditContactLayout">
+
+    <!--pagina de editare contacte-->
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_navn"
+        android:inputType="textPersonName"
+        android:hint="@string/labelName" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_phoneNo"
+        android:hint="@string/labelPhoneNo"
+        android:layout_below="@+id/text_name"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_phone"
+        android:inputType="phone" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_date"
+        android:hint="@string/labelBirthday"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/text_phoneNo"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/imageView_date" />
+
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/labelSMS"
+        android:id="@+id/button_sendSMS"
+        android:checked="false"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/text_date"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_navn"
+        android:layout_alignBottom="@+id/text_name"
+        android:src="@drawable/person"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelName"
+        android:contextClickable="false" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_phone"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/phone"
+        android:layout_marginBottom="5dp"
+        android:layout_alignBottom="@+id/text_phoneNo"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelPhoneNo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_date"
+        android:src="@drawable/date"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/text_date"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:contentDescription="@string/labelBirthday" />
+
+</RelativeLayout>

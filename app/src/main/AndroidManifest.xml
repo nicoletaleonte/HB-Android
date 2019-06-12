@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.happybirthday_android">
 
-    <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" ></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" ></uses-permission>
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:icon="@drawable/birthday_logo"
+        android:label="Birthday"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="Birthday" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MyContact"
+            android:label="@string/title_activity_my_contact" >
+        </activity>
+        <activity
+            android:name=".EditContact"
+            android:label="@string/title_activity_edit_contact" >
+        </activity>
+        <activity
+            android:name=".SetPreferencesActivity"
+            android:label="@string/preferanser" >
+        </activity>
+
+        <service android:name=".LogicNotificationAndSendSMS"></service>
+        <service android:name=".SetPeriodicService"></service>
+
+        <receiver android:name=".Receiver"
+            android:enabled="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.example.happybirthday_android.LogicNotificationAndSendSMS" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
